@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}О плавании{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🏊‍♂️ Что такое плавание?</h1>
+    
+    <div class="page-nav">
+        <a href="#history" class="page-nav__link">История</a>
+        <a href="#types" class="page-nav__link">Виды</a>
+        <a href="#sources" class="page-nav__link">Источники</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="history" class="section bookmark">
+        <h2>{{ history.title }}</h2>
+        <p>{{ history.content }}</p>
+        {% if history.image %}
+        <img src="{{ history.image }}" alt="{{ history.title }}" style="max-width: 100%; border-radius: 15px; margin: 20px 0;">
+        {% else %}
+        <img src="{% static 'images/ancient_swimming.jpg' %}" alt="Древнее плавание" style="max-width: 100%; border-radius: 15px; margin: 20px 0;">
+        {% endif %}
+    </section>
+
+    <section id="types" class="section bookmark">
+        <h2>{{ types.title }}</h2>
+        <p>{{ types.content|linebreaksbr }}</p>
+        {% if types.image %}
+        <img src="{{ types.image }}" alt="{{ types.title }}" style="max-width: 100%; border-radius: 15px; margin: 20px 0;">
+        {% endif %}
+    </section>
+
+    <section id="sources" class="section bookmark">
+        <h2>{{ sources.title }}</h2>
+        <p>
+            <a href="https://ru.wikipedia.org/wiki/Плавание" target="_blank" class="button">Википедия: Плавание</a>
+            <a href="https://worldaquatics.com/" target="_blank" class="button">World Aquatics</a>
+            <a href="https://www.usaswimming.org/" target="_blank" class="button">USA Swimming</a>
+        </p>
+        {% if sources.image %}
+        <img src="{{ sources.image }}" alt="{{ sources.title }}" style="max-width: 100%; border-radius: 15px; margin: 20px 0;">
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}10 причин начать плавать{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🌟 10 причин начать плавать прямо сейчас</h1>
+    
+    <div class="page-nav">
+        <a href="#reasons-list" class="page-nav__link">Список причин</a>
+        <a href="#details" class="page-nav__link">Подробнее</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="reasons-list" class="section bookmark">
+        <h2>Топ-10 причин</h2>
+        <ol class="list" style="list-style-type: decimal;">
+            {% for reason in reasons_data %}
+            <li>
+                <strong>{{ reason.title }}</strong>
+                <ul class="list-nested">
+                    {% for item in reason.items %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+
+    <section id="details" class="section bookmark">
+        <h2>{{ details.title }}</h2>
+        <p>{{ details.content }}</p>
+        <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://basseiny.online/&ved=2ahUKEwi5hfrB-KqTAxUi3TQHHcgTHpwQFnoECBkQAQ&usg=AOvVaw34gUi4P-MgHizlWAzrqlrg" target="_blank" class="button">Найти бассейн</a>
+    </section>
+</div>
+{% endblock %}

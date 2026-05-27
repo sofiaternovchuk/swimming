@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Стили плавания{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>📚 Стили плавания</h1>
+    
+    <div class="page-nav">
+        <a href="#table" class="page-nav__link">Таблица стилей</a>
+        <a href="#comparison" class="page-nav__link">Сравнение</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="table" class="section bookmark">
+        {{ table.content|safe }}
+    </section>
+
+    <section id="comparison" class="section bookmark">
+        <h2>{{ comparison.title }}</h2>
+        {{ comparison.content|safe }}
+    </section>
+</div>
+{% endblock %}

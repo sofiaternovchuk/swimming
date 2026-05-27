@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Образовательная программа{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🎓 Мировая экономика</h1>
+    
+    <div class="page-nav">
+        <a href="#about" class="page-nav__link">О программе</a>
+        <a href="#staff" class="page-nav__link">Руководство</a>
+        <a href="#classmates" class="page-nav__link">Сокурсники</a>
+        <a href="#reviews" class="page-nav__link">Отзывы</a>
+        <a href="#add_review" class="page-nav__link">Оставить отзыв</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <!-- О программе -->
+    <section id="about" class="section bookmark">
+        <h2>{{ about.name }}</h2>
+        <p>📧 {{ about.email }}</p>
+        <p>📞 {{ about.phone }}</p>
+    </section>
+
+    <!-- Руководство -->
+    <section id="staff" class="section bookmark">
+        <h2>Руководство</h2>
+        <div class="cards">
+            {% for person in staff %}
+            <div class="card">
+                <h3>{{ person.name }}</h3>
+                <p><strong>{{ person.position }}</strong></p>
+                <p>{{ person.email }}</p>
+                <p>{{ person.phone }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Сокурсники -->
+    <section id="classmates" class="section bookmark">
+        <h2>Мои сокурсники</h2>
+        <div class="cards">
+            {% for classmate in classmates %}
+            <div class="card">
+                <h3>{{ classmate.name }}</h3>
+                <p>{{ classmate.email }}</p>
+                <p>{{ classmate.phone }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section id="stats" class="section bookmark">
+        <h2>Статистика отзывов</h2>
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
+                <span style="font-size: 36px;">⭐ {{ avg_rating }}</span>
+                <p>Средняя оценка</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
+                <span style="font-size: 36px;">{{ reviews_count }}</span>
+                <p>Всего отзывов</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Таблица отзывов -->
+    <section id="reviews" class="section bookmark">
+        <h2>Отзывы об образовательной программе</h2>
+        
+        <div style="margin-bottom: 20px;">
+            <a href="?sort=rating" class="button">Сортировать по оценке</a>
+            <a href="?sort=date" class="button">Сортировать по дате</a>
+        </div>
+        <form method="get" style="margin-bottom: 20px;">
+            <label>Показать отзывы с оценкой от:</label>
+            <input type="number" name="min_rating" min="1" max="10" step="1">
+            <button type="submit" class="button">Фильтровать</button>
+        </form>
+        <div style="overflow-x: auto;">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr style="background:#2176ae; color:white;">
+                    <th style="padding:10px;">Автор</th>
+                    <th style="padding:10px;">Отзыв</th>
+                    <th style="padding:10px;">Оценка</th>
+                    <th style="padding:10px;">Дата</th>
+                </tr>
+                {% for review in reviews %}
+                <tr style="border-bottom:1px solid #b3e0ff;">
+                    <td style="padding:10px;">{{ review.author }}</td>
+                    <td style="padding:10px;">{{ review.content }}</td>
+                    <td style="padding:10px; text-align:center;">⭐ {{ review.rating }}</td>
+                    <td style="padding:10px;">{{ review.created_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" style="text-align:center; padding:20px;">Пока нет отзывов. Будь первым!</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+    <!-- Форма добавления отзыва -->
+    <section id="add_review" class="section bookmark">
+        <h2>Оставить отзыв</h2>
+        <form method="post" style="max-width:500px; margin:0 auto;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button">Отправить отзыв</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

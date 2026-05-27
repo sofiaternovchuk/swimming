@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Польза плавания{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>💪 Польза плавания для здоровья</h1>
+    
+    <div class="page-nav">
+        <a href="#physical" class="page-nav__link">Физическая польза</a>
+        <a href="#mental" class="page-nav__link">Психическая польза</a>
+        <a href="#medical" class="page-nav__link">Медицинские аспекты</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="physical" class="section bookmark">
+        <h2>{{ physical.title }}</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="{% static 'images/muscles.jpg' %}" alt="Мышцы" class="card__image">
+                <h3>Развитие мышц</h3>
+                <p>Задействует все группы мышц, особенно спину, плечи, руки и ноги</p>
+            </div>
+            <div class="card">
+                <img src="{% static 'images/heart.jpg' %}" alt="Сердце" class="card__image">
+                <h3>Сердечно-сосудистая система</h3>
+                <p>Укрепляет сердце и улучшает кровообращение</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mental" class="section bookmark">
+        <h2>{{ mental.title }}</h2>
+        {% if mental.image %}
+        <img src="{{ mental.image }}" alt="{{ mental.title }}" style="max-width:100%; border-radius:15px; margin:20px 0;">
+        {% endif %}
+        <ul class="list">
+            {% for line in mental.content.splitlines %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="medical" class="section bookmark">
+        <h2>{{ medical.title }}</h2>
+        {% if medical.image %}
+        <img src="{{ medical.image }}" alt="{{ medical.title }}" style="max-width:100%; border-radius:15px; margin:20px 0;">
+        {% endif %}
+        {{ medical.content|linebreaksbr }}
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Моя образовательная программа{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🎓 Мировая экономика</h1>
+    
+    <div class="page-nav">
+        <a href="#program" class="page-nav__link">О программе</a>
+        <a href="#management" class="page-nav__link">Руководство</a>
+        <a href="#classmates" class="page-nav__link">Сокурсники</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="program" class="section bookmark">
+        <h2>{{ education.program.title }}</h2>
+        <p>{{ education.program.description }}</p>
+    </section>
+
+    <section id="management" class="section bookmark">
+        <h2>Руководство программы</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card__image" style="height: 200px; background: var(--light-blue); display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 48px;">👩‍🏫</span>
+                </div>
+                <h3>{{ education.leader.name }}</h3>
+                <p><strong>Руководитель</strong></p>
+                <p>📞 {{ education.leader.phone }}</p>
+            </div>
+            <div class="card">
+                <div class="card__image" style="height: 200px; background: var(--light-blue); display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 48px;">👩‍💼</span>
+                </div>
+                <h3>{{ education.manager.name }}</h3>
+                <p><strong>Менеджер</strong></p>
+                <p>📞 {{ education.manager.phone }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="classmates" class="section bookmark">
+        <h2>Мои сокурсники</h2>
+        <div class="cards">
+            {% for classmate in education.classmates %}
+            <div class="card">
+                <div class="card__image" style="height: 150px; background: var(--light-blue); display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 48px;">👤</span>
+                </div>
+                <h3>{{ classmate.name }}</h3>
+                <p>📧 {{ classmate.email }}</p>
+                <p>📞 {{ classmate.phone }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
