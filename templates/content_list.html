@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}Контент сайта{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>📄 Контент сайта из базы данных</h1>
+
+    <form method="get" style="margin-bottom: 20px;">
+        <label>Категория:</label>
+        <select name="category">
+            <option value="">Все категории</option>
+            {% for category in categories %}
+                {% if category %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <label>Сортировка:</label>
+        <select name="sort">
+            <option value="page_name">По названию страницы</option>
+            <option value="title">По заголовку</option>
+            <option value="date">Сначала новые</option>
+        </select>
+
+        <button type="submit" class="button">Показать</button>
+    </form>
+
+    <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#2176ae; color:white;">
+            <th style="padding:10px;">Название страницы</th>
+            <th style="padding:10px;">Заголовок</th>
+            <th style="padding:10px;">Категория</th>
+            <th style="padding:10px;">Опубликовано</th>
+        </tr>
+
+        {% for page in pages %}
+        <tr style="border-bottom:1px solid #b3e0ff;">
+            <td style="padding:10px;">{{ page.page_name }}</td>
+            <td style="padding:10px;">{{ page.title }}</td>
+            <td style="padding:10px;">{{ page.category }}</td>
+            <td style="padding:10px;">
+                {% if page.is_published %}Да{% else %}Нет{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

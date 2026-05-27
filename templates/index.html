@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Главная - Мир плавания{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🏊‍♂️ Добро пожаловать в мир плавания!</h1>
+    
+    <div class="page-nav">
+        <a href="#michael" class="page-nav__link">Великий пловец</a>
+        <a href="#competitions" class="page-nav__link">Соревнования</a>
+        <a href="#facts" class="page-nav__link">Интересные факты</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="michael" class="section bookmark">
+        <h2 class="section__title">{{ michael.title }}</h2>
+        <div class="cards">
+            <div class="card">
+                <a href="https://ru.wikipedia.org/wiki/Фелпс,_Майкл" target="_blank">
+                    <img src="{% if michael.image %}{{ michael.image }}{% else %}{% static 'images/michael.jpg' %}{% endif %}" alt="Майкл Фелпс" class="card__image">
+                </a>
+                <h3 class="card__title">23 золотые медали</h3>
+                <p class="card__text">{{ michael.content|linebreaksbr }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="competitions" class="section bookmark">
+        <h2 class="section__title">{{ competitions.title }}</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="{% if competitions.image %}{{ competitions.image }}{% else %}{% static 'images/competition1.jpg' %}{% endif %}" alt="Заплыв" class="card__image">
+                <p class="card__text">{{ competitions.content }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="facts" class="section bookmark">
+        <h2 class="section__title">{{ facts.title }}</h2>
+        <ul class="list">
+            {% for line in facts.content.splitlines %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

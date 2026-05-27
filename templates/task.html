@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Решение задачи{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>🧮 Задача: Лучший ученик</h1>
+    
+    <div class="page-nav">
+        <a href="#task" class="page-nav__link">Условие</a>
+        <a href="#solution" class="page-nav__link">Решение</a>
+        <a href="#result" class="page-nav__link">Результат</a>
+        <a href="#" class="page-nav__link">↑ К началу</a>
+    </div>
+
+    <section id="task" class="section bookmark">
+        <h2>Условие задачи</h2>
+        <p>Мария Ивановна хочет подсчитать суммарный балл своих учеников за экзамен и определить самого лучшего ученика в классе.</p>
+        
+        <h3>Формат ввода:</h3>
+        <ul class="list">
+            <li>На первой строке через пробел вводятся имена учеников</li>
+            <li>На второй строке вводятся оценки в формате "30-10-20 78-23-43 ..."</li>
+        </ul>
+
+        <h3>Пример:</h3>
+        <pre style="background: #f4f4f4; padding: 15px; border-radius: 10px;">
+Алина Маша Кристина Анастасия Валерия Игорь
+30-10-20 78-23-43 15-18-10 18-33-87 7-29-34 90-38-30
+        </pre>
+    </section>
+
+    <section id="solution" class="section bookmark">
+        <h2>Решение</h2>
+        <form method="get" class="card" style="max-width: 600px; margin: 0 auto;">
+            <div style="margin-bottom: 20px;">
+                <label><strong>Имена учеников:</strong></label><br>
+                <input type="text" name="str1" value="{{ str1 }}" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+                <small>Пример: Алина Маша Кристина</small>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label><strong>Оценки:</strong></label><br>
+                <input type="text" name="str2" value="{{ str2 }}" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+                <small>Пример: 30-10-20 78-23-43 53-30-80</small>
+            </div>
+            
+            <button type="submit" class="button">Найти лучшего ученика</button>
+        </form>
+    </section>
+
+    {% if result %}
+    <section id="result" class="section bookmark">
+        <h2>Результат</h2>
+        <div class="card" style="text-align: center; font-size: 24px;">
+            <p>{{ result|safe }}</p>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
